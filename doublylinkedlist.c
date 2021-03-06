@@ -45,24 +45,42 @@ void push(struct node **headRef,int val){
     newNode->prev = NULL;
     newNode->next = temp;  
     temp->prev=newNode;
-    
+
     *headRef = newNode;
 }
 
 void insertAfter(struct node** headRef,int val,int key){
-    struct node * temp = *headRef;
+    struct node * temp = *headRef,*second;
     struct node * newNode = (struct node *) malloc(sizeof(struct node));
     newNode->data = val;
     while(temp!=NULL){
+        second = temp->next;
         if(temp->data==key) {
-            newNode->next = temp->next;
             newNode->prev = temp;
+            newNode->next = temp->next;
+            second->prev = newNode;
             temp->next = newNode;
             return;
         }
         temp = temp->next;
     }
     printf("Key not present!");
+    return;
+}
+
+void deleteStart(struct node **headRef){
+    struct node * temp = *headRef;
+    temp = temp->next;
+    temp->prev = NULL;
+    *headRef = temp;
+    return;
+}
+
+void deleteEnd(struct node **lastRef){
+    struct node * temp = *lastRef;
+    temp = temp->prev;
+    temp->next = NULL;
+    *lastRef = temp;
     return;
 }
 void displayLinkedList(struct node **headRef){
@@ -98,11 +116,13 @@ int main(){
         printf("Enter 0 if you want to stop\n Enter 1 if you want to add more\n");
         scanf("%d",&choice);
     }
-    printf("Semi Final Doubly Linked List :\n");
     displayLinkedList(&head);
-    printf("Final Doubly Linked List :\n");
     displayReverse(&last);
     insertAfter(&head,15,7);
+    displayLinkedList(&head);
+    deleteStart(&head);
+    deleteEnd(&last);
+    displayReverse(&last);
     printf("Final Doubly Linked List :\n");
     displayLinkedList(&head);
     return 0;
