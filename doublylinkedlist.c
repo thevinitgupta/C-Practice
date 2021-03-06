@@ -83,6 +83,32 @@ void deleteEnd(struct node **lastRef){
     *lastRef = temp;
     return;
 }
+
+void deleteValue(struct node **headRef,struct node **lastRef,int key){
+    struct node * temp = *headRef,*second,*previous;
+    previous = temp->prev;
+    while(temp!=NULL){
+        if(temp->data==key) {
+            if(temp->prev==NULL){
+                deleteStart(&temp);
+                return;
+            }
+            else if(temp->next==NULL){
+                deleteEnd(&temp);
+                return;
+            }
+            second = temp->next;
+            previous->next =second;
+            second->prev = previous;
+            return;
+        }
+        previous = temp;
+        temp = temp->next;
+    }
+    printf("Key not present!");
+    return;
+}
+
 void displayLinkedList(struct node **headRef){
     printf("\nDoubly Linked List values :\n");
     struct node * temp = *headRef;
@@ -122,6 +148,7 @@ int main(){
     displayLinkedList(&head);
     deleteStart(&head);
     deleteEnd(&last);
+    deleteValue(&head,&last,7);
     displayReverse(&last);
     printf("Final Doubly Linked List :\n");
     displayLinkedList(&head);
