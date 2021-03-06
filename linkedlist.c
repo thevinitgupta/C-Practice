@@ -61,8 +61,8 @@ void deleteFirst(struct node** headRef){
         printf("List Empty!");
         return;
     }
-    temp = temp->next;
-    *headRef = temp;
+    *headRef = temp->next;
+    free(temp);
 }
 void deleteNode(struct node** headRef,int key){
     struct node *temp = *headRef,*prev = NULL;
@@ -77,6 +77,7 @@ void deleteNode(struct node** headRef,int key){
            } 
            else {
                prev->next = temp->next;
+               free(temp);
            }
            return;
         }
@@ -129,7 +130,7 @@ int main(){
     deleteFirst(&head);
     printf("After deleting first node :");
     printLinkedList(&head);
-    deleteNode(&head,12);
+    deleteNode(&head,24);
     printf("After deleting some node :");
     printLinkedList(&head);
     return 0;
