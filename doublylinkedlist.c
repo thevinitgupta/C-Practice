@@ -45,6 +45,7 @@ void push(struct node **headRef,int val){
     newNode->prev = NULL;
     newNode->next = temp;  
     temp->prev=newNode;
+    
     *headRef = newNode;
 }
 
