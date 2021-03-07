@@ -7,7 +7,7 @@ struct Node
    int data;
    struct Node *next;
 }*head = NULL;
-
+int size = 0;
 void push(int value)
 {
     struct Node *newNode;
@@ -28,6 +28,7 @@ void push(int value)
        temp -> next = head;
     }
     printf("\nInsertion success!!!\n");
+    size++;
 }
 void append(int value)
 {
@@ -47,7 +48,8 @@ void append(int value)
       temp -> next = newNode;
       newNode -> next = head;
    }
-   printf("\nInsertion success!!!\n");   
+   printf("\nInsertion success!!!\n");
+   size++;   
 }
 void insertAfter(int value, int location)
 {
@@ -77,6 +79,7 @@ void insertAfter(int value, int location)
       newNode -> next = temp -> next;
       temp -> next = newNode;
       printf("\nInsertion success!!!\n");
+      size++;
    }
 }
 void deleteBeginning()
@@ -85,18 +88,16 @@ void deleteBeginning()
       printf("\nList is Empty!!! Deletion not possible!!!\n");
    else
    {
-      struct Node *temp = head;
-      if(temp -> next == head)
-      {
-         head = NULL;
-         free(temp);
+      struct Node *temp = head,*start=head;
+      while(temp->next!=head){
+        temp = temp->next;
       }
-      else{
-         head = head -> next;
-         free(temp);
-      }
+      head = start->next;
+      temp->next = head;
+      free(start);
       printf("\nDeletion success!!!\n");
    }
+   size--;
 }
 void deleteEnd()
 {
@@ -120,6 +121,7 @@ void deleteEnd()
       }
       printf("\nDeletion success!!!\n");
    }
+   size--;
 }
 void deleteSpecific(int delValue)
 {
@@ -128,64 +130,77 @@ void deleteSpecific(int delValue)
    else
    {
       struct Node *temp1 = head, *temp2;
-      while(temp1 -> data != delValue)
-      {
-         if(temp1 -> next == head)
-         {
-            printf("\nGiven node is not found in the list!!!\n");
-            return;
-         }
-         else
-         {
-            temp2 = temp1;
-            temp1 = temp1 -> next;
-         }
-      }
-      if(temp1 -> next == head){
-         head = NULL;
-         free(temp1);
-      }
-      else{
-         if(temp1 == head)
-         {
-            temp2 = head;
-            while(temp2 -> next != head)
-               temp2 = temp2 -> next;
-            head = head -> next;
-            temp2 -> next = head;
-            free(temp1);
-         }
-         else
-         {
-            if(temp1 -> next == head)
-            {
-               temp2 -> next = head;
-            }
-            else
-            {
-               temp2 -> next = temp1 -> next;
-            }   
-            free(temp1);
-         }
-      }
+    while(temp1 -> data != delValue)
+    {
+       if(temp1 -> next == head)
+       {
+          printf("\nGiven node is not found in the list!!!\n");
+          return;
+       }
+       else
+       {
+          temp2 = temp1;
+          temp1 = temp1 -> next;
+       }
+    }
+    if(temp1==head){
+        deleteBeginning();
+    }
+    else if(temp1->next==head){
+        deleteEnd();
+    }
+    else {
+        temp2->next=temp1->next;
+        free(temp1);
+        size--;
+    }
+    //   if(temp1 -> next == head){
+    //      head = NULL;
+    //      free(temp1);
+    //   }
+    //   else{
+    //      if(temp1 == head)
+    //      {
+    //         temp2 = head;
+    //         while(temp2 -> next != head)
+    //            temp2 = temp2 -> next;
+    //         head = head -> next;
+    //         temp2 -> next = head;
+    //         free(temp1);
+    //      }
+    //      else
+    //      {
+    //         if(temp1 -> next == head)
+    //         {
+    //            temp2 -> next = head;
+    //         }
+    //         else
+    //         {
+    //            temp2 -> next = temp1 -> next;
+    //         }   
+    //         free(temp1);
+    //      }
       printf("\nDeletion success!!!\n");
    }
 }
 void displayLinkedList()
 {
+    int i=1;
    if(head == NULL)
       printf("\nList is Empty!!!\n");
    else
    {
       struct Node *temp = head;
       printf("\nList elements are: \n");
-      while(temp -> next != head)
+      while(i<=size)
       {
-         printf("%d ---> ",temp -> data);
+         printf("%d ---> ",temp->data);
          temp=temp->next;
+         i++;
       }
-      printf("%d\n", temp -> data);
+      printf("%d\n", temp->data);
    }
+   return;
 }
 
 void main()
@@ -205,5 +220,15 @@ void main()
         scanf("%d",&choice);
     }
     displayLinkedList();
+    append(9);
+    displayLinkedList();
+    deleteSpecific(9);
+    displayLinkedList();
+    // displayLinkedList();
+    deleteBeginning();
+    displayLinkedList();
+    deleteEnd();
+    displayLinkedList();
+    return ;
 }
 

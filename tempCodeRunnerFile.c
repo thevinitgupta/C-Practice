@@ -1,4 +1,4 @@
-while(temp -> next != head)
-    //   {
-    //      printf("%d ---> ",temp -> data);
-    //   }
+dequeue();
+    // peek();
+    // enqueue(6);
+    // display();

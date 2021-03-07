@@ -36,6 +36,7 @@ void dequeue(){
         printf("Dequeued element is : %d\n",queue[front]);
         front++;
     }
+    return;
 }
 
 void display(){
@@ -63,17 +64,28 @@ void peek(){
 
 int main(){
     int choice =1,data;
-    while(choice==1){
+    // while(choice==1){
+    //     printf("Enter data to enqueue : \n");
+    //     scanf("%d",&data);
+    //     enqueue(data);
+    //     printf("Enter 0 if you want to exit,\nAnd 1 to add more elements\n");
+    //     scanf("%d",&choice);
+    // }
+    // display();
+    int i;
+    for(i=0;i<MAXQUEUE;i++){
         printf("Enter data to enqueue : \n");
         scanf("%d",&data);
         enqueue(data);
-        printf("Enter 0 if you want to exit,\nAnd 1 to add more elements\n");
-        scanf("%d",&choice);
     }
     display();
-    dequeue();
-    peek();
-    enqueue(6);
-    display();
+    for(i=0;i<MAXQUEUE;i++){
+        dequeue();
+        display();
+    }
+    // dequeue();
+    // peek();
+    // enqueue(6);
+    // display();
     return 0;
 }
