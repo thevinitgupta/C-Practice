@@ -84,6 +84,21 @@ struct node* Delete(struct node *root, int data) {
 	return root;
 }
 
+struct node * Search(struct node * root,int key){
+    if(root==NULL){
+        return root;
+    }
+    else if(key == root->data){
+        return root;
+    }
+    else if(key<root->data){
+        return Search(root->left,key);
+    }
+    else {
+        return Search(root->right,key);
+    }
+}
+
 void inOrder(struct node* rootCurr)
 {
     if (rootCurr != NULL) {
@@ -113,7 +128,7 @@ void postOrder(struct node* rootCurr)
 int main(){
     int i = 0;
     int arr[8] = {2,1,14,3,16,22,11,6};
-    
+     struct node * search;
     printf("Insertion started!\n");
     for(i=0;i<8;i++){
         insert(arr[i]);
@@ -129,6 +144,8 @@ int main(){
     Delete(root,6);
     printf("In Order after deleting 6 : \n");
     inOrder(root);
+    search = Search(root,2);
+    printf("Element found  left child -> %d\n",search->left->data);
     printf("Pre Order : \n");
     preOrder(root);
     printf("Post Order : \n");
