@@ -154,32 +154,7 @@ void deleteSpecific(int delValue)
         free(temp1);
         size--;
     }
-    //   if(temp1 -> next == head){
-    //      head = NULL;
-    //      free(temp1);
-    //   }
-    //   else{
-    //      if(temp1 == head)
-    //      {
-    //         temp2 = head;
-    //         while(temp2 -> next != head)
-    //            temp2 = temp2 -> next;
-    //         head = head -> next;
-    //         temp2 -> next = head;
-    //         free(temp1);
-    //      }
-    //      else
-    //      {
-    //         if(temp1 -> next == head)
-    //         {
-    //            temp2 -> next = head;
-    //         }
-    //         else
-    //         {
-    //            temp2 -> next = temp1 -> next;
-    //         }   
-    //         free(temp1);
-    //      }
+    
       printf("\nDeletion success!!!\n");
    }
 }
