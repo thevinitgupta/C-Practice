@@ -1,4 +1,3 @@
-dequeue();
-    // peek();
-    // enqueue(6);
-    // display();
+for(i=0;i<8;i++){
+        insert(arr[i]);
+    }
