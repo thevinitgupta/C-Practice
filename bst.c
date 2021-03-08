@@ -8,6 +8,12 @@ struct node {
 };
 struct node *root = NULL;
 
+struct node* FindMin(struct node* root)
+{
+	while(root->left != NULL) root = root->left;
+	return root;
+}
+
 void insert(int val){
     
     struct node *prev = root, *ptr = root;
@@ -45,6 +51,39 @@ void insert(int val){
     printf("Insertion SuccessFull!\n");
     return;
 }
+
+struct node* Delete(struct node *root, int data) {
+	if(root == NULL) return root; 
+	else if(data < root->data) root->left = Delete(root->left,data);
+	else if (data > root->data) root->right = Delete(root->right,data);
+	// Wohoo... I found you, Get ready to be deleted	
+	else {
+		// Case 1:  No child
+		if(root->left == NULL && root->right == NULL) { 
+			free(root);
+			root = NULL;
+		}
+		//Case 2: One child 
+		else if(root->left == NULL) {
+			struct node *temp = root;
+			root = root->right;
+			free(root);
+		}
+		else if(root->right == NULL) {
+			struct node *temp = root;
+			root = root->left;
+			free(root);
+		}
+		// case 3: 2 children
+		else { 
+			struct node *temp = FindMin(root->right);
+			root->data = temp->data;
+			root->right = Delete(root->right,temp->data);
+		}
+	}
+	return root;
+}
+
 void inOrder(struct node* rootCurr)
 {
     if (rootCurr != NULL) {
@@ -86,6 +125,9 @@ int main(){
     insert(7);
     insert(5);
     printf("In Order : \n");
+    inOrder(root);
+    Delete(root,6);
+    printf("In Order after deleting 6 : \n");
     inOrder(root);
     printf("Pre Order : \n");
     preOrder(root);
