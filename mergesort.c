@@ -2,7 +2,7 @@
 
 #define max 10
 
-int a[11];
+int a[10] = {21,55,31,3,46,5,3,33,26,9};
 int b[10];
 
 void merging(int low, int mid, int high) {
@@ -40,19 +40,19 @@ void sort(int low, int high) {
 
 int main() { 
    int i;
-   printf("Enter elements to sort \n");
-    for(i=0;i<=max;i++){
-        scanf("%d",&a[i]);
-    }
+   // printf("Enter elements to sort \n");
+   //  for(i=0;i<=max;i++){
+   //      scanf("%d",&a[i]);
+   //  }
    printf("List before sorting\n");
    
-   for(i = 0; i <= max; i++)
+   for(i = 0; i <= max-1; i++)
       printf("%d ", a[i]);
 
-   sort(0, max);
+   sort(0, max-1);
 
-   printf("\nList after sorting\n");
+   printf("\nList after sorting with Merge Sort Technique :\n");
    
-   for(i = 0; i <= max; i++)
+   for(i = 0; i <= max-1; i++)
       printf("%d ", a[i]);
 }
