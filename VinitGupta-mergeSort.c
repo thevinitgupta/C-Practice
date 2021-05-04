@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#define max 10
+#define max 5
 
-int a[10] = {21,55,31,3,46,5,3,33,26,9};
-int b[10];
+int a[max];
+int b[max];
 
 void merging(int low, int mid, int high) {
    int l1, l2, i;
@@ -40,10 +40,11 @@ void sort(int low, int high) {
 
 int main() { 
    int i;
-   // printf("Enter elements to sort \n");
-   //  for(i=0;i<=max;i++){
-   //      scanf("%d",&a[i]);
-   //  }
+   printf("Enter elements to sort \n");
+    for(i=0;i<max;i++){
+        scanf("%d",&a[i]);
+    }
+
    printf("List before sorting\n");
    
    for(i = 0; i <= max-1; i++)
