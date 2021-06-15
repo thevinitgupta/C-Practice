@@ -1,10 +1,12 @@
 #include<stdio.h>
 
 int main(){
-    int c;
-    printf("Enter the value of c\n");
-    scanf("%d",&c);
-    printf("%d is the input",c);
+    int a=2,b=3;
+    a = a^b;
+    b = a^b;
+    a = a^b;
+    printf("%d\n",a);
+    printf("%d\n",b);
 
     return 0;
 }
