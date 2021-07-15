@@ -5,10 +5,10 @@ int Fibonacci(int);
 int main()
 {
    int n, i = 0, c;
-    printf("Enter the limit : ");
+    printf("Enter the number of elements to print : ");
    scanf("%d",&n);
  
-   printf("Fibonacci series\n");
+   printf("Fibonacci series upto %d elements :-\n",n);
  
    for ( c = 1 ; c <= n ; c++ )
    {
